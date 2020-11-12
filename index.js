@@ -79,10 +79,10 @@ toString(){
     - All instances built with Car:
         + should initialize with a `tank` at 0
         + should initialize with an `odometer` at 0
-    - Give cars the ability to get fueled with a `.fill(gallons)` method. Add the gallons to `tank`.
+    - DONE Give cars the ability to get fueled with a `.fill(gallons)` method. Add the gallons to `tank`.
     - Give cars ability to `.drive(distance)`. The distance driven:
-        + Should cause the `odometer` to go up.
-        + Should cause the the `tank` to go down taking `milesPerGallon` into account.
+        + DONE Should cause the `odometer` to go up. (if we drive a distance, odometer goes up.)
+        + Should cause the the `tank` to go down taking `milesPerGallon` into account.(if we drive a distance, tank goes down by gallons which = distance/milesPerGallon.)
     - A car which runs out of `fuel` while driving can't drive any more distance:
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
@@ -97,9 +97,32 @@ fill(gallons){
   this.tank += gallons;
 }
 drive(distance){
-  if (this.tank === 0){}
-}
-} //closes constructor
+  const range = this.tank * this.milesPerGallon;
+  if (distance > range){
+    this.tank = 0;
+    this.odometer += range;
+    return `I ran out of fuel at ${this.odometer} miles!`;
+  }
+  else {
+      this.odometer = this.odometer + distance;
+      this.tank = this.tank - distance/this.milesPerGallon;
+    }
+  }
+} // constructor closing. 
+
+
+
+// drive(distance){
+//   const range = this.tank * this.milesPerGallon;
+//   if (distance < range){
+//   this.odometer += distance;
+//   let gallonsUsed = distance/this.milesPerGallon;
+//   this.tank = this.tank - gallonsUsed;
+// }
+//   else if (this.tank === 0){
+//     return `I ran out of fuel at ${this.odometer} miles!`;
+//   }
+ //closes constructor
 
 //leaving some space because my code keeps uncommenting.
 
@@ -116,9 +139,15 @@ drive(distance){
         + Speaking should return a phrase `Hello my name is {name}, I am from {location}`.
         + {name} and {location} of course come from the instance's own properties.
 */
-class Lambdasian {
-
+class Lambdasian {constructor (name, age, location){
+  this.name = name;
+  this.age = age;
+  this.location = location;
 }
+speak(){
+  return `Hello my name is ${this.name}, I am from ${this.location}`;
+}
+} // closes the Lambdasian constructor. 
 
 /*
   TASK 4
