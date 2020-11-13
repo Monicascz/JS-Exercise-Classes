@@ -139,15 +139,23 @@ drive(distance){
         + Speaking should return a phrase `Hello my name is {name}, I am from {location}`.
         + {name} and {location} of course come from the instance's own properties.
 */
-class Lambdasian {constructor (name, age, location){
-  this.name = name;
-  this.age = age;
-  this.location = location;
+class Lambdasian{
+  constructor(attributes){
+  this.name = attributes.name;
+  this.age = attributes.age;
+  this.location = attributes.location;
 }
-speak(){
-  return `Hello my name is ${this.name}, I am from ${this.location}`;
-}
+  speak(){
+ return `Hello my name is ${this.name}, I am from ${this.location}`;
+  }
 } // closes the Lambdasian constructor. 
+
+const LAMBDASIAN = new Lambdasian({
+  name: 'Monica',
+  age: 28,
+  location: 'San Diego',
+});
+LAMBDASIAN.speak();
 
 /*
   TASK 4
@@ -163,10 +171,20 @@ speak(){
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
-
-}
-
+class Instructor extends Lambdasian{constructor(attributes){
+  super(attributes);
+  this.specialty = attributes.specialty;
+  this.favLanguage = attributes.favLanguage;
+  this.catchPhrase = attributes.catchPhrase;
+  }
+    demo(subject){
+    this.subject = "Lambda";
+    return `Today we are learning about ${subject}`;
+    }
+    grade(student, subject){
+    return `${student.name} receives a perfect score on ${subject}`;
+    }
+} 
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -182,7 +200,12 @@ class Instructor {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
+class Student extends Lambdasian {constructor(attributes){
+  super(attributes);
+  this.previousBackground = attributes.previousBackground;
+  this.className = attributes.className;
+  this.favSubjects = attributes.favSubjects;
+}
 
 }
 
